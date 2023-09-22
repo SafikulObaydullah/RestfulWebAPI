@@ -5,6 +5,7 @@ using RestfulWebAPI.Helper;
 using RestfulWebAPI.Models;
 using RestfulWebAPI.Repository;
 using RestfulWebAPI.ViewModel;
+using System.Dynamic;
 using System.Text;
 
 namespace RestfulWebAPI.Controllers
@@ -130,6 +131,25 @@ namespace RestfulWebAPI.Controllers
          {
             return Problem(ex.Message);
          }
+      }
+      [HttpGet("GetInitialData")]
+      public JsonResult GetInitialData()
+      {
+         dynamic result = new ExpandoObject();
+         try
+         {
+            result.branches = this.unitofWork.InstituteBranchRepository.GetAll(null, null).ToList();
+         }
+         catch (Exception ex)
+         {
+            ModelState.AddModelError("Failed", ex.Message);
+         }
+         return Json(result);
+      }
+      [NonAction]
+      public virtual JsonResult Json(object? data)
+      {
+         return new JsonResult(data);
       }
    }
 }

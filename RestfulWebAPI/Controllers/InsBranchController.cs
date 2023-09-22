@@ -5,6 +5,7 @@ using RestfulWebAPI.Helper;
 using RestfulWebAPI.Models;
 using RestfulWebAPI.Repository;
 using RestfulWebAPI.ViewModel;
+using System.Dynamic;
 using System.Text;
 
 namespace RestfulWebAPI.Controllers
@@ -79,15 +80,24 @@ namespace RestfulWebAPI.Controllers
          }
       }
       [HttpPut("UpdateBranch")]
-      public IActionResult Update(Branch Branch)
+      public IActionResult Update(BranchVM model)
       {
+         var data = unitofWork.InstituteBranchRepository.GetByID(t => t.Id.Equals(model.Id)).FirstOrDefault();
+         if (data == null)
+         {
+            throw new Exception("Data Not Found");
+         };
+         data.Name = model.Name;
+         data.City = model.City;
+         data.Address = model.Address;
+         data.InstituteID = model.InstituteID;
          try
          {
-            this.unitofWork.InstituteBranchRepository.Update(Branch);
+            this.unitofWork.InstituteBranchRepository.Update(data);
             var m = this.unitofWork.Save();
             if (m.IsSuccess)
             {
-               return Ok(new { Data = Branch, result = m });
+               return Ok(new { Data = data, result = m });
             }
             else
             {
@@ -120,6 +130,25 @@ namespace RestfulWebAPI.Controllers
          {
             return Problem(ex.Message);
          }
+      }
+      [HttpGet("GetInitialData")]
+      public JsonResult GetInitialData()
+      {
+         dynamic result = new ExpandoObject();
+         try
+         { 
+            result.institute = this.unitofWork.InstituteRepository.GetAll(null, null).ToList(); 
+         }
+         catch (Exception ex)
+         {
+            ModelState.AddModelError("Failed", ex.Message);
+         }
+         return Json(result);
+      }
+      [NonAction]
+      public virtual JsonResult Json(object? data)
+      {
+         return new JsonResult(data);
       }
    }
 }

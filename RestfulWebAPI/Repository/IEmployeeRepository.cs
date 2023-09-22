@@ -22,6 +22,7 @@ namespace RestfulWebAPI.Repository
                                  join b  in _context.Branches on a.BranchID equals b.Id
                                  select new EmployeeVM
                                  {
+                                    Id = a.Id,
                                     Name = a.Name,
                                     Email = a.Email,  
                                     ContactNumber = a.ContactNumber,

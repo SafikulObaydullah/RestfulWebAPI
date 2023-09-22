@@ -22,6 +22,7 @@ namespace RestfulWebAPI.Repository
                                  join b  in _context.Institute on a.InstituteID equals b.Id
                                  select new BranchVM
                                  {
+                                    Id = a.Id,
                                     Name = a.Name,
                                     Address = a.Address, 
                                     City = a.City, 

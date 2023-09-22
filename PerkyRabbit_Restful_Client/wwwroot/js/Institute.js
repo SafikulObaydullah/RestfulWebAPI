@@ -1,8 +1,4 @@
 ﻿
-var InstituteList = [];
-//$(document).ready(function () {
-//   alert("hi");
-//});
 $(document).ready(function () {
    $("#btnUpdate").hide();
    $("#btnSave").show();
@@ -65,8 +61,8 @@ function load() {
                " <td>" + v.type + "</td>" +
                "<td>" + v.address + "</td>" +
                "<td>" + v.description + "</td>" +
-               " <td> <button onClick='Edit(" + v.Id + ")'>Edit </button></td>" +
-               " <td> <button onClick='Delete(" + v.Id + ")'>Delete </button></td></tr>";
+               " <td> <button onClick='Edit(" + v.id + ")'>Edit </button></td>" +
+               " <td> <button onClick='Delete(" + v.id + ")'>Delete </button></td></tr>";
             $("#tble tbody").append(html)
          })
       },
@@ -82,19 +78,17 @@ function Edit(id) {
    $.ajax({
       url: "https://localhost:7065/api/Institutes/GetByID?Id=" + id,
       type: "JSON",
-      method: "GET",
-      //data: JSON.stringify(obj),
+      method: "GET", 
       contentType: "application/json",
-      success: function (result) {
-         alert("hi");
+      success: function (result) { 
          console.log("Get by ID ", result);
          $("#exampleModalLabel").html("Update Unit Information");
          IsEdit = true;
-         $("#txtName").val(result[0].Name),
-            $("#txttxtInstituteType").val(result[0].txtInstituteType),
+            $("#txtName").val(result[0].name),
+            $("#txtInstituteType").val(result[0].type),
             $("#txtAddress").val(result[0].address),
-            $("#ddlInsBranch").val(result[0].description),
-            $("#txtId").val(result[0].Id),
+            $("#txtDescription").val(result[0].description),
+            $("#txtId").val(result[0].id),
             $("#MyModal").modal('show')
       },
       error: function (er) {
@@ -105,11 +99,11 @@ function Edit(id) {
 function Update() {
    var url = "https://localhost:7065/api/Institutes/UpdateInstitute"
    var updateData = new Object()
-   updateData.id = $("#txtId").val(),
-      updateData.name = $("#txtName").val(),
-      updateData.type = $("#txttxtInstituteType").val(),
-      updateData.address = $("#txtAddress").val(),
-      updateData.description = $("#ddlInsBranch").val()
+      updateData.Id = $("#txtId").val(),
+      updateData.Name = $("#txtName").val(),
+      updateData.Type = $("#txtInstituteType").val(),
+      updateData.Address = $("#txtAddress").val(),
+      updateData.Description = $("#txtDescription").val()
    $.ajax({
       url: url,
       contentType: "application/json; charset=utf-8",
@@ -146,34 +140,7 @@ function Delete(id) {
       }
    });
 }
-//function LoadInitalData() {
-//   $.ajax({
-//      url: "https://localhost:7065/api/Unit/GetInitialData",
-//      method: "GET",
-//      dataType: "json",
-//      success: function (data) {
-//         InstituteList = data.institute;
-//         InsBranchList = data.insBranch;
-//         console.log("Institute = ", InstituteList);
-//         console.log("Branch List ", InsBranchList);
-//         var s = '<option value="-1">Select Institute</option>';
-//         for (var i = 0; i < InstituteList.length; i++) {
-//            console.log(data[i])
-//            s += '<option value="' + InstituteList[i].id + '">' + InstituteList[i].instituteName + '</option>';
-//         }
-//         $("#txtAddress").html(s);
 
-//         var s = '<option value="-1">Select Institute Branch</option>';
-//         for (var i = 0; i < InsBranchList.length; i++) {
-//            s += '<option value="' + InsBranchList[i].id + '">' + InsBranchList[i].branchName + '</option>';
-//         }
-//         $("#ddlInsBranch").html(s);
-//      },
-//      error: function (jqXHR, textStatus, errorThrown) {
-//         console.log("Error:", textStatus, errorThrown);
-//      }
-//   });
-//}
 
 function AddNew() {
    $('#staticBackdropLabel').text('Create New Institute');
