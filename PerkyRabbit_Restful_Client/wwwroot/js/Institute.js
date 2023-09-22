@@ -132,6 +132,7 @@ function Delete(id) {
       dataType: "json",
       type: "Delete",
       success: function (result) {
+         toastr.success(result.message, 'Delete Successfully');
          clearALl();
          load();
       },
@@ -144,8 +145,7 @@ function Delete(id) {
 
 function AddNew() {
    $('#staticBackdropLabel').text('Create New Institute');
-   $('#btnSave').removeClass('btn btn-ghost-info active w-10');
-  // $('#spanParentID').html(0);
+   $('#btnSave').removeClass('btn btn-ghost-info active w-10'); ;
    $('#txtId').html(0);
    $('#txtName').val('');
    $('#txtInstituteType').val('');

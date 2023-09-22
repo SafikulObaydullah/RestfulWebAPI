@@ -17,7 +17,7 @@ $(document).ready(function () {
 })
 function Save() {
    var obj = new Object();
-      obj.Id = 0,
+      obj.Id = $('#txtId').val(),
       obj.Name = $("#txtName").val(),
       obj.ContactNumber = $("#txtContactNumber").val(),
       obj.Email = $("#txtEmail").val(),
@@ -54,11 +54,9 @@ function load() {
       url: "https://localhost:7065/api/Employee/GetEmployee",
       type: "JSON",
       method: "GET",
-      success: function (result) {
-         console.log("Get All = ", result)
+      success: function (result) { 
          $("#tble tbody").empty();
-         $.each(result, function (i, v) {
-            console.log("Data value = ", v)
+         $.each(result, function (i, v) { 
             var html = "<tr><td>" + v.branchName + "</td>" +
                " <td>" + v.name + "</td>" +
                "<td>" + v.email + "</td>" +
@@ -82,8 +80,7 @@ function Edit(id) {
       type: "JSON",
       method: "GET",
       contentType: "application/json",
-      success: function (result) {
-         console.log("Get by ID ", result);
+      success: function (result) { 
          $("#exampleModalLabel").html("Update Branch Information");
          IsEdit = true;
          $("#txtName").val(result[0].name),
@@ -101,7 +98,7 @@ function Edit(id) {
 function Update() {
    var url = "https://localhost:7065/api/Employee/UpdateEmployee"
    var updateData = new Object()
-   updateData.Id = $("#txtId").val(),
+      updateData.Id = $("#txtId").val(),
       updateData.Name = $("#txtName").val(),
       updateData.ContactNumber = $("#txtContactNumber").val(),
       updateData.Email = $("#txtEmail").val(),
@@ -134,6 +131,7 @@ function Delete(id) {
       dataType: "json",
       type: "Delete",
       success: function (result) {
+         toastr.success(result.message, 'Delete Successfully');
          clearALl();
          load();
       },
@@ -148,8 +146,7 @@ function LoadInitalData() {
       method: "GET",
       dataType: "json",
       success: function (data) {
-         BranchList = data.branches;
-         console.log("Branch = ", BranchList);
+         BranchList = data.branches; 
          var s = '<option value="-1">Select Branch</option>';
          for (var i = 0; i < BranchList.length; i++) { 
             s += '<option value="' + BranchList[i].id + '">' + BranchList[i].name + '</option>';
@@ -165,7 +162,6 @@ function LoadInitalData() {
 function AddNew() {
    $('#staticBackdropLabel').text('Create New Institute');
    $('#btnSave').removeClass('btn btn-ghost-info active w-10');
-   // $('#spanParentID').html(0);
    $('#txtId').html(0);
    $('#txtName').val('');
    $('#txtEmail').val('');
