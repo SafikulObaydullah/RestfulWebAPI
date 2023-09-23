@@ -17,7 +17,7 @@ $(document).ready(function () {
 })
 function Save() {
    var obj = new Object();
-   obj.id = 0,
+      obj.id = 0,
       obj.Name = $("#txtName").val(),
       obj.Address = $("#txtAddress").val(),
       obj.City = $("#txtCity").val(),

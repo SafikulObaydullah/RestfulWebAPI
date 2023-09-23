@@ -1,5 +1,6 @@
 ﻿
 var BranchList = [];
+
 $(document).ready(function () {
    $("#btnUpdate").hide();
    $("#btnSave").show();
@@ -16,11 +17,11 @@ $(document).ready(function () {
 })
 function Save() {
    var obj = new Object();
-      obj.Id = $('#txtId').val(),
-      obj.Name = $("#txtName").val(),
-      obj.ContactNumber = $("#txtContactNumber").val(),
-      obj.Email = $("#txtEmail").val(),
-      obj.BranchID = $("#ddlBranch").val(),
+      obj.id = 0,
+      obj.name = $("#txtName").val(),
+      obj.contactNumber = $("#txtContactNumber").val(),
+      obj.email = $("#txtEmail").val(),
+      obj.branchID = $("#ddlBranch").val(),
       $.ajax({
          url: "https://localhost:7065/api/Employee/SaveEmployee",
          type: "JSON",
@@ -159,7 +160,7 @@ function LoadInitalData() {
 }
 
 function AddNew() {
-   $('#exampleModalLabel').text('Create New Employee');
+   $('#exampleModalLabel').text('Create New Institute');
    $('#btnSave').removeClass('btn btn-ghost-info active w-10');
    $('#txtId').html(0);
    $('#txtName').val('');
