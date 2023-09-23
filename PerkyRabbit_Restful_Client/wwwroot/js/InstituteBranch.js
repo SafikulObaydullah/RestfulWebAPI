@@ -55,11 +55,9 @@ function load() {
       url: "https://localhost:7065/api/InsBranch/GetBranch",
       type: "JSON",
       method: "GET",
-      success: function (result) {
-         console.log("Get All = ", result)
+      success: function (result) { 
          $("#tble tbody").empty();
-         $.each(result, function (i, v) {
-            console.log("Data value = ", v)
+         $.each(result, function (i, v) { 
             var html = "<tr><td>" + v.insttitueName + "</td>" +
                " <td>" + v.name + "</td>" +
                "<td>" + v.city + "</td>" +
@@ -83,8 +81,7 @@ function Edit(id) {
       type: "JSON",
       method: "GET", 
       contentType: "application/json",
-      success: function (result) {
-         console.log("Get by ID ", result);
+      success: function (result) { 
          $("#exampleModalLabel").html("Update Branch Information");
          IsEdit = true;
             $("#txtName").val(result[0].name), 
@@ -150,11 +147,9 @@ function LoadInitalData() {
       method: "GET",
       dataType: "json",
       success: function (data) {
-         InstituteList = data.institute; 
-         console.log("Institute = ", InstituteList); 
-         var s = '<option value="-1">Select Institute</option>';
-         for (var i = 0; i < InstituteList.length; i++) {
-            console.log(data[i])
+         InstituteList = data.institute;  
+         var s = '<option selected value="-1">Select Institute</option>';
+         for (var i = 0; i < InstituteList.length; i++) { 
             s += '<option value="' + InstituteList[i].id + '">' + InstituteList[i].name + '</option>';
          }
          $("#ddlInstitute").html(s); 
@@ -166,7 +161,7 @@ function LoadInitalData() {
 }
 
 function AddNew() {
-   $('#staticBackdropLabel').text('Create New Institute');
+   $('#exampleModalLabel').text('Create New Institute Branch');
    $('#btnSave').removeClass('btn btn-ghost-info active w-10'); 
    $('#txtId').html(0);
    $('#txtName').val('');

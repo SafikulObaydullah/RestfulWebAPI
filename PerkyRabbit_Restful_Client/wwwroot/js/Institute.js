@@ -144,7 +144,7 @@ function Delete(id) {
 
 
 function AddNew() {
-   $('#staticBackdropLabel').text('Create New Institute');
+   $('#exampleModalLabel').text('Create New Institute');
    $('#btnSave').removeClass('btn btn-ghost-info active w-10'); ;
    $('#txtId').html(0);
    $('#txtName').val('');

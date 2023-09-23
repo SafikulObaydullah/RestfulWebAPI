@@ -1,6 +1,5 @@
 ﻿
 var BranchList = [];
-
 $(document).ready(function () {
    $("#btnUpdate").hide();
    $("#btnSave").show();
@@ -147,7 +146,7 @@ function LoadInitalData() {
       dataType: "json",
       success: function (data) {
          BranchList = data.branches; 
-         var s = '<option value="-1">Select Branch</option>';
+         var s = '<option selected value="-1">Select Branch</option>';
          for (var i = 0; i < BranchList.length; i++) { 
             s += '<option value="' + BranchList[i].id + '">' + BranchList[i].name + '</option>';
          }
@@ -160,7 +159,7 @@ function LoadInitalData() {
 }
 
 function AddNew() {
-   $('#staticBackdropLabel').text('Create New Institute');
+   $('#exampleModalLabel').text('Create New Employee');
    $('#btnSave').removeClass('btn btn-ghost-info active w-10');
    $('#txtId').html(0);
    $('#txtName').val('');
