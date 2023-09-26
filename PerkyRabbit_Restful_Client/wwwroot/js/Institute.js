@@ -61,8 +61,8 @@ function load() {
                " <td>" + v.type + "</td>" +
                "<td>" + v.address + "</td>" +
                "<td>" + v.description + "</td>" +
-               " <td> <button onClick='Edit(" + v.id + ")'>Edit </button></td>" +
-               " <td> <button onClick='Delete(" + v.id + ")'>Delete </button></td></tr>";
+               " <td> <button onClick='Edit(" + v.id + ")'><span class='k-icon k-i-edit'></span></button></td>" +
+               " <td> <button onClick='Delete(" + v.id + ")'><span class='k-icon k-i-delete'></span></button></td></tr>";
             $("#tble tbody").append(html)
          })
       },

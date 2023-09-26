@@ -1,7 +1,7 @@
 ﻿
 var BranchList = [];
 
-$(document).ready(function () {
+$(document).ready(function () { 
    $("#btnUpdate").hide();
    $("#btnSave").show();
    var IsEdit = false;
@@ -61,8 +61,8 @@ function load() {
                " <td>" + v.name + "</td>" +
                "<td>" + v.email + "</td>" +
                "<td>" + v.contactNumber + "</td>" +
-               " <td> <button onClick='Edit(" + v.id + ")'>Edit </button></td>" +
-               " <td> <button onClick='Delete(" + v.id + ")'>Delete </button></td></tr>";
+               " <td> <button onClick='Edit(" + v.id + ")'><span class='k-icon k-i-edit'></span></button></td>" +
+               " <td> <button onClick='Delete(" + v.id + ")'><span class='k-icon k-i-delete'></span></button></td></tr>";
             $("#tble tbody").append(html)
          })
       },
@@ -81,7 +81,7 @@ function Edit(id) {
       method: "GET",
       contentType: "application/json",
       success: function (result) { 
-         $("#exampleModalLabel").html("Update Branch Information");
+         $("#exampleModalLabel").html("Update Employee Information");
          IsEdit = true;
          $("#txtName").val(result[0].name),
             $("#txtContactNumber").val(result[0].contactNumber),
@@ -147,7 +147,7 @@ function LoadInitalData() {
       dataType: "json",
       success: function (data) {
          BranchList = data.branches; 
-         var s = '<option selected value="-1">Select Branch</option>';
+         var s = '<option selected disabled hidden value="">Select Branch</option>';
          for (var i = 0; i < BranchList.length; i++) { 
             s += '<option value="' + BranchList[i].id + '">' + BranchList[i].name + '</option>';
          }
@@ -160,7 +160,7 @@ function LoadInitalData() {
 }
 
 function AddNew() {
-   $('#exampleModalLabel').text('Create New Institute');
+   $('#exampleModalLabel').text('Create New Employee');
    $('#btnSave').removeClass('btn btn-ghost-info active w-10');
    $('#txtId').html(0);
    $('#txtName').val('');

@@ -62,8 +62,8 @@ function load() {
                " <td>" + v.name + "</td>" +
                "<td>" + v.city + "</td>" +
                "<td>" + v.address + "</td>" +
-               " <td> <button onClick='Edit(" + v.id + ")'>Edit </button></td>" +
-               " <td> <button onClick='Delete(" + v.id + ")'>Delete </button></td></tr>";
+               " <td> <button onClick='Edit(" + v.id + ")'><span class='k-icon k-i-edit'></span></button></td>" +
+               " <td> <button onClick='Delete(" + v.id + ")'><span class='k-icon k-i-delete'></span></button></td></tr>";
             $("#tble tbody").append(html)
          })
       },
@@ -148,7 +148,7 @@ function LoadInitalData() {
       dataType: "json",
       success: function (data) {
          InstituteList = data.institute;  
-         var s = '<option selected value="-1">Select Institute</option>';
+         var s = '<option value="" selected disabled hidden>Select Institute</option>';
          for (var i = 0; i < InstituteList.length; i++) { 
             s += '<option value="' + InstituteList[i].id + '">' + InstituteList[i].name + '</option>';
          }

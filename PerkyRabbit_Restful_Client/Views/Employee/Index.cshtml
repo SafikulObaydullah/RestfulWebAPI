@@ -2,9 +2,44 @@
    ViewData["Title"] = "Index";
    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+   /* Style the custom select container */
+   .custom-select {
+      position: relative;
+      width: 200px; /* Adjust the width as needed */
+   }
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+      /* Style the select element itself (hidden) */
+      /*.custom-select select {
+         display: none;
+      }*/
+
+      /* Style the dropdown arrow (Unicode for downward-pointing triangle) */
+      .custom-select::after {
+         content: "\25BC";
+         position: absolute;
+         top: 50%;
+         right: 10px;
+         transform: translateY(-50%);
+         pointer-events: none; /* Allows clicks to pass through to the select element */
+      }
+
+      /* Style the options */
+      .custom-select select option {
+         padding: 10px;
+         background-color: #f9f9f9;
+         color: #333;
+         border: none;
+         border-bottom: 1px solid #ccc;
+      }
+
+         /* Change the appearance when an option is selected */
+         .custom-select select option:checked {
+            background-color: #3498db;
+            color: white;
+         }
+
+</style>
 <script src="~/js/employee.js" asp-append-version="true"></script>
 
 <main id="main" class="main">
@@ -29,18 +64,18 @@
          </div>
       </div>
    </div>
-
+   
    <div class="page-body pageBodyPaddingRemove">
       <div class="container-xl">
          <table class="table table-bordered" id="tble">
-            <thead>
+            <thead style="font-size:medium">
                <tr>
                   <td>Branch Name</td>
                   <td>Employee Name</td>
                   <td>Contact Number</td>
                   <td>Email</td>
-                  <td>Edit</td>
-                  <td>Delete</td>
+                  <td style="width:0px;">Edit</td>
+                  <td style="width:0px;">Delete</td>
                </tr>
             </thead>
             <tbody>
@@ -62,7 +97,8 @@
                   <div class="col-md-6">
                      <div class="form-group">
                         <label class="control-label">Institute Branch</label>
-                        <div class="form-group">
+                        <label class="control-label"></label>
+                        <div class="custom-select">
                            <select class="form-control" id="ddlBranch"></select>
                         </div>
                      </div>

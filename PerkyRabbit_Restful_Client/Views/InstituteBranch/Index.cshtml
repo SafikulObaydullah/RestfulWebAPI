@@ -3,8 +3,44 @@
    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+   /* Style the custom select container */
+   .custom-select {
+      position: relative;
+      width: 200px; /* Adjust the width as needed */
+   }
+
+      /* Style the select element itself (hidden) */
+      /*.custom-select select {
+            display: none;
+         }*/
+
+      /* Style the dropdown arrow (Unicode for downward-pointing triangle) */
+      .custom-select::after {
+         content: "\25BC";
+         position: absolute;
+         top: 50%;
+         right: 10px;
+         transform: translateY(-50%);
+         pointer-events: none; /* Allows clicks to pass through to the select element */
+      }
+
+      /* Style the options */
+      .custom-select select option {
+         padding: 10px;
+         background-color: #f9f9f9;
+         color: #333;
+         border: none;
+         border-bottom: 1px solid #ccc;
+      }
+
+         /* Change the appearance when an option is selected */
+         .custom-select select option:checked {
+            background-color: #3498db;
+            color: white;
+         }
+
+</style>
 <script src="~/js/institutebranch.js" asp-append-version="true"></script>
 
 <main id="main" class="main">
@@ -20,7 +56,6 @@
             <div class="col-auto ms-auto d-print-none">
                <div class="btn-list">
                   <a href="#" data-toggle="modal" onclick="AddNew()" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-report">
-                     <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
                      Create New Institute Branch
                   </a>
@@ -39,8 +74,8 @@
                   <td>Branch Name</td>
                   <td>City</td>
                   <td>Address</td> 
-                  <td>Edit</td>
-                  <td>Delete</td>
+                  <td style="width:0px;">Edit</td>
+                  <td style="width:0px;">Delete</td>
                </tr>
             </thead>
             <tbody>
@@ -61,8 +96,8 @@
                <div class="row g-3 mt-0" style="justify-content: left;">
                   <div class="col-md-6">
                      <div class="form-group">
-                        <label class="control-label">Institute</label>
-                        <div class="form-group">
+                        <label class="control-label">Institute Name</label> 
+                        <div class="custom-select">
                            <select class="form-control" id="ddlInstitute"></select>
                         </div>
                      </div>
@@ -70,7 +105,7 @@
                   <div class="col-md-6">
                      <div class="form-group">
                         <label id="txtId" hidden></label>
-                        <label class="control-label">Name</label>
+                        <label class="control-label">	Branch Name</label>
                         <input class="form-control" type="text" id="txtName" />
                      </div>
                   </div> 
